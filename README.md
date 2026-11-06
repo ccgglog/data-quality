@@ -115,11 +115,18 @@ def dead_reason(sym, kl_sym, fr_sym, asof_ts, fr_lag_ref):
 ## 怎么用
 
 ```bash
-python data_quality.py            # 全池扫描，输出报告
-python data_quality.py --json     # 机器可读，供下游调用
+python quality.py            # 用内置合成数据跑演示，直接看检测效果
+python quality.py --json     # 机器可读，供下游调用
 ```
 
-零第三方依赖，只用标准库。
+零第三方依赖，只用标准库。`quality.py` 里的检测函数可以直接 import 到你自己的管道里：
+
+```python
+from quality import trailing_flat, splices, check_series
+```
+
+内置演示数据构造了 4 个标的：一个健康、一个冻结、一个停更、一个拼接。
+跑一遍就能看到四类问题各自被识别成什么样。
 
 ---
 
